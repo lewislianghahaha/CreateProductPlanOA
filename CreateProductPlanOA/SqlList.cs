@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace CreateProductPlanOA
 {
-    class SqlList
+    public class SqlList
     {
+        private string _result;
+
+
+
     }
 }

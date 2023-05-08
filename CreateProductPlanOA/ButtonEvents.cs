@@ -6,13 +6,13 @@ namespace CreateProductPlanOA
 {
     public class ButtonEvents : AbstractListPlugIn
     {
-
+        Generate generate = new Generate();
 
         public override void BarItemClick(BarItemClickEventArgs e)
         {
-            //定义主键变量(用与收集所选中的行主键值)
+            //定义主表主键变量(用与收集所选中的行主键值)
             var primaryKeyid = string.Empty;
-            //定义明细行主键变量(用与收集所选中的行主键值)
+            //定义明细表主键变量(用与收集所选中的行主键值)
             var entryKeyid = string.Empty;
             //中转判断值
             var tempstring = string.Empty;
@@ -31,7 +31,7 @@ namespace CreateProductPlanOA
                 //判断需要有选择记录时才继续
                 if (selectedrows.Count > 0)
                 {
-                    //todo:通过循环将选中行的主键进行收集(注:去除重复的选项,只保留不重复的主键记录)
+                    //todo:通过循环将选中行的主键进行收集(注:去除重复的选项,只保留不重复的主表主键记录)
                     foreach (var row in selectedrows)
                     {
                         if (string.IsNullOrEmpty(primaryKeyid))
@@ -52,7 +52,7 @@ namespace CreateProductPlanOA
                     //todo:初始化中间变量
                     tempstring = "";
 
-                    //todo:通过循环将选中行的明细行主键进行收集(注:去除重复的选项,只保留不重复的明细行主键记录) 
+                    //todo:通过循环将选中行的明细表主键进行收集(注:去除重复的选项,只保留不重复的明细表主键记录) 
                     foreach (var row in selectedrows)
                     {
                         if (string.IsNullOrEmpty(entryKeyid))
@@ -71,8 +71,8 @@ namespace CreateProductPlanOA
                     }
 
                     //todo:执行运算并返回相关结果
-                    mesage = "";
-                    View.ShowMessage(mesage != "Finish" ? $"新增超额出货异常,原因:'{mesage}'" : "新增成功,请打开OA,并留意右下角的OA信息提示");
+                    mesage = generate.GetMessageIntoOa(primaryKeyid,entryKeyid,username);
+                    View.ShowMessage(mesage != "Finish" ? $"新增订制产品生产计划流程异常,原因:'{mesage}'" : "新增成功,请打开OA,并留意右下角的OA信息提示");
                 }
                 else
                 {
