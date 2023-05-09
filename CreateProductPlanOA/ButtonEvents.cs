@@ -28,10 +28,11 @@ namespace CreateProductPlanOA
 
                 //获取列表上通过复选框勾选的记录
                 var selectedrows = this.ListView.SelectedRowsInfo;
+
                 //判断需要有选择记录时才继续
                 if (selectedrows.Count > 0)
                 {
-                    //todo:通过循环将选中行的主键进行收集(注:去除重复的选项,只保留不重复的主表主键记录)
+                    //通过循环将选中行的主键进行收集(注:去除重复的选项,只保留不重复的主表主键记录)
                     foreach (var row in selectedrows)
                     {
                         if (string.IsNullOrEmpty(primaryKeyid))
@@ -49,34 +50,42 @@ namespace CreateProductPlanOA
                         }
                     }
 
-                    //todo:初始化中间变量
-                    tempstring = "";
-
-                    //todo:通过循环将选中行的明细表主键进行收集(注:去除重复的选项,只保留不重复的明细表主键记录) 
-                    foreach (var row in selectedrows)
+                    //todo:若检测到有多个表头KEY，即不能继续
+                    if (primaryKeyid.Contains(","))
                     {
-                        if (string.IsNullOrEmpty(entryKeyid))
+                        View.ShowErrMessage("检测到选择了多张单据,不能继续,请只针对一张销售订单进行操作.");
+                    }
+                    else
+                    {
+                        //初始化中间变量
+                        tempstring = "";
+
+                        //通过循环将选中行的明细表主键进行收集(注:去除重复的选项,只保留不重复的明细表主键记录) 
+                        foreach (var row in selectedrows)
                         {
-                            entryKeyid = "'" + Convert.ToString(row.EntryPrimaryKeyValue) + "'";
-                            tempstring = Convert.ToString(row.EntryPrimaryKeyValue);
-                        }
-                        else
-                        {
-                            if (tempstring != Convert.ToString(row.EntryPrimaryKeyValue))
+                            if (string.IsNullOrEmpty(entryKeyid))
                             {
-                                entryKeyid += "," + "'" + Convert.ToString(row.EntryPrimaryKeyValue) + "'";
+                                entryKeyid = "'" + Convert.ToString(row.EntryPrimaryKeyValue) + "'";
                                 tempstring = Convert.ToString(row.EntryPrimaryKeyValue);
                             }
+                            else
+                            {
+                                if (tempstring != Convert.ToString(row.EntryPrimaryKeyValue))
+                                {
+                                    entryKeyid += "," + "'" + Convert.ToString(row.EntryPrimaryKeyValue) + "'";
+                                    tempstring = Convert.ToString(row.EntryPrimaryKeyValue);
+                                }
+                            }
                         }
-                    }
 
-                    //todo:执行运算并返回相关结果
-                    mesage = generate.GetMessageIntoOa(primaryKeyid,entryKeyid,username);
-                    View.ShowMessage(mesage != "Finish" ? $"新增订制产品生产计划流程异常,原因:'{mesage}'" : "新增成功,请打开OA,并留意右下角的OA信息提示");
+                        //执行运算并返回相关结果
+                        mesage = generate.GetMessageIntoOa(primaryKeyid, entryKeyid, username);
+                        View.ShowMessage(mesage != "Finish" ? $"新增订制产品生产计划流程异常,原因:'{mesage}'" : "新增成功,请打开OA,并留意右下角的OA信息提示");
+                    }
                 }
                 else
                 {
-                    View.ShowErrMessage("请选择‘物料’后继续.");
+                    View.ShowErrMessage("没有可执行的记录,请选择后继续.");
                 }
             }
         }
