@@ -35,7 +35,7 @@ namespace CreateProductPlanOA
                 //根据username获取OA-人员ID 及 部门ID
                 var oaDt = searchDt.SearchOaUserInfo(username).Copy();
 
-                //todo:获取销售订单明细记录
+                //获取K3销售订单明细记录
                 detaildt = searchDt.SearchK3OrderDetailRecord(entryKeyid).Copy();
 
                 //todo:通过primaryKeyid 及 entryKeyid获取对应K3记录,并将记录分别插入至oauptempdt 及 oainserttempdt临时表内
@@ -116,7 +116,7 @@ namespace CreateProductPlanOA
                     //根据获取的requestid查找对应的mainid值
                     mainid = searchDt.SearchOaRecord(requestid);
                     //整合明细数据
-                    oainserttempdt.Merge(InsertRecordToTempDt(oainserttempdt, detaildt));
+                    oainserttempdt.Merge(InsertRecordToTempDt(oainserttempdt));
 
                     //插入明细数据至formtable_main_16_dt1 内
                     ImportDtToDb("formtable_main_16_dt1", oainserttempdt);
@@ -188,12 +188,11 @@ namespace CreateProductPlanOA
         /// 将数据整合至临时表内-OA表体插入时使用
         /// </summary>
         /// <param name="resultdt"></param>
-        /// <param name="sourcedt"></param>
         /// <returns></returns>
-        private DataTable InsertRecordToTempDt(DataTable resultdt, DataTable sourcedt)
+        private DataTable InsertRecordToTempDt(DataTable resultdt)
         {
             //循环将销售订单明细记录插入至临时表内
-            foreach (DataRow rows in sourcedt.Rows)
+            foreach (DataRow rows in detaildt.Rows)
             {
                 var newrow = resultdt.NewRow();
                 newrow[1] = mainid;     //主表主键
