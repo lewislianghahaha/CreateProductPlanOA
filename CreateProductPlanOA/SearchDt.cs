@@ -12,15 +12,16 @@ namespace CreateProductPlanOA
         /// <summary>
         /// 根据SQL语句查询得出对应的DT
         /// </summary>
-        /// <param name="sqlscript"></param>
+        /// <param name="sqlscript">各SQL语句</param>
+        /// <param name="conid">0:连接K3 1:连接OA</param>
         /// <returns></returns>
-        private DataTable UseSqlSearchIntoDt(string sqlscript)
+        private DataTable UseSqlSearchIntoDt(string sqlscript, int conid)
         {
             var resultdt = new DataTable();
 
             try
             {
-                var sqlDataAdapter = new SqlDataAdapter(sqlscript, conDb.GetK3CloudConn());
+                var sqlDataAdapter = new SqlDataAdapter(sqlscript, conDb.GetK3CloudConn(conid));
                 sqlDataAdapter.Fill(resultdt);
             }
             catch (Exception)
@@ -37,13 +38,14 @@ namespace CreateProductPlanOA
         /// 作用:更新及删除
         /// </summary>
         /// <param name="sqlscript"></param>
+        /// <param name="conid">0:连接K3 1:连接OA</param>
         /// <returns></returns>
-        public bool Generdt(string sqlscript)
+        public bool Generdt(string sqlscript, int conid)
         {
             var result = true;
             try
             {
-                var sqlcon = conDb.GetK3CloudConn();
+                var sqlcon = conDb.GetK3CloudConn(conid);
                 using (sqlcon)
                 {
                     sqlcon.Open();

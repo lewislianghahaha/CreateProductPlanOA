@@ -21,7 +21,7 @@ namespace CreateProductPlanOA
 
             try
             {
-                //todo:
+                //todo:目的:收集从‘销售订单’列表
 
 
             }

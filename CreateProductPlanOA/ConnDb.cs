@@ -7,21 +7,27 @@ namespace CreateProductPlanOA
         /// <summary>
         /// 获取连接返回信息
         /// </summary>
+        /// <param name="conid">0:连接K3 1:连接OA</param>
         /// <returns></returns>
-        public SqlConnection GetK3CloudConn()
+        public SqlConnection GetK3CloudConn(int conid)
         {
-            var sqlcon = new SqlConnection(GetConnectionString());
+            var sqlcon = new SqlConnection(GetConnectionString(conid));
             return sqlcon;
         }
 
         /// <summary>
-        /// 连接字符串
+        /// 0:连接K3 1:连接OA
         /// </summary>
+        /// <param name="conid"></param>
         /// <returns></returns>
-        private string GetConnectionString()
+        private string GetConnectionString(int conid)
         {
-            var strcon = @"Data Source='192.168.1.228';Initial Catalog='AIS20181204095717';Persist Security Info=True;User ID='sa'; Password='kingdee';
+            var strcon = conid == 0
+                 ? @"Data Source='192.168.1.228';Initial Catalog='AIS20220817082811';Persist Security Info=True;User ID='sa'; Password='kingdee';
+                       Pooling=true;Max Pool Size=40000;Min Pool Size=0"
+                 : @"Data Source='192.168.1.237';Initial Catalog='ecology';Persist Security Info=True;User ID='sa'; Password='Yatu8773866';
                        Pooling=true;Max Pool Size=40000;Min Pool Size=0";
+
             return strcon;
         }
     }
