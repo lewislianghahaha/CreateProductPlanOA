@@ -11,14 +11,14 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
-      <xsd:complexType name="ArrayOfString">
-        <xsd:sequence>
-          <xsd:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="xsd:string" />
-        </xsd:sequence>
-      </xsd:complexType>
       <xsd:complexType name="ArrayOfArrayOfString">
         <xsd:sequence>
           <xsd:element minOccurs="0" maxOccurs="unbounded" name="ArrayOfString" nillable="true" type="tns:ArrayOfString" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfString">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="xsd:string" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:element name="getWorkflowRequestResponse">
@@ -890,33 +890,6 @@
           <xsd:element minOccurs="0" name="workflowTypeName" nillable="true" type="xsd:string" />
         </xsd:sequence>
       </xsd:complexType>
-      <xsd:complexType name="ArrayOfWorkflowRequestLog">
-        <xsd:sequence>
-          <xsd:element minOccurs="0" maxOccurs="unbounded" name="WorkflowRequestLog" nillable="true" type="ns1:WorkflowRequestLog" />
-        </xsd:sequence>
-      </xsd:complexType>
-      <xsd:complexType name="WorkflowRequestLog">
-        <xsd:sequence>
-          <xsd:element minOccurs="0" name="agentor" nillable="true" type="xsd:string" />
-          <xsd:element minOccurs="0" name="agentorDept" nillable="true" type="xsd:string" />
-          <xsd:element minOccurs="0" name="annexDocHtmls" nillable="true" type="xsd:string" />
-          <xsd:element minOccurs="0" name="id" nillable="true" type="xsd:string" />
-          <xsd:element minOccurs="0" name="nodeId" nillable="true" type="xsd:string" />
-          <xsd:element minOccurs="0" name="nodeName" nillable="true" type="xsd:string" />
-          <xsd:element minOccurs="0" name="operateDate" nillable="true" type="xsd:string" />
-          <xsd:element minOccurs="0" name="operateTime" nillable="true" type="xsd:string" />
-          <xsd:element minOccurs="0" name="operateType" nillable="true" type="xsd:string" />
-          <xsd:element minOccurs="0" name="operatorDept" nillable="true" type="xsd:string" />
-          <xsd:element minOccurs="0" name="operatorId" nillable="true" type="xsd:string" />
-          <xsd:element minOccurs="0" name="operatorName" nillable="true" type="xsd:string" />
-          <xsd:element minOccurs="0" name="operatorSign" nillable="true" type="xsd:string" />
-          <xsd:element minOccurs="0" name="receivedPersons" nillable="true" type="xsd:string" />
-          <xsd:element minOccurs="0" name="remark" nillable="true" type="xsd:string" />
-          <xsd:element minOccurs="0" name="remarkSign" nillable="true" type="xsd:string" />
-          <xsd:element minOccurs="0" name="signDocHtmls" nillable="true" type="xsd:string" />
-          <xsd:element minOccurs="0" name="signWorkFlowHtmls" nillable="true" type="xsd:string" />
-        </xsd:sequence>
-      </xsd:complexType>
       <xsd:complexType name="ArrayOfWorkflowDetailTableInfo">
         <xsd:sequence>
           <xsd:element minOccurs="0" maxOccurs="unbounded" name="WorkflowDetailTableInfo" nillable="true" type="ns1:WorkflowDetailTableInfo" />
@@ -971,6 +944,33 @@
         <xsd:sequence>
           <xsd:element minOccurs="0" name="requestRecords" nillable="true" type="ns1:ArrayOfWorkflowRequestTableRecord" />
           <xsd:element minOccurs="0" name="tableDBName" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfWorkflowRequestLog">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="WorkflowRequestLog" nillable="true" type="ns1:WorkflowRequestLog" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="WorkflowRequestLog">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="agentor" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="agentorDept" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="annexDocHtmls" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="id" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="nodeId" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="nodeName" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="operateDate" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="operateTime" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="operateType" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="operatorDept" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="operatorId" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="operatorName" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="operatorSign" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="receivedPersons" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="remark" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="remarkSign" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="signDocHtmls" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" name="signWorkFlowHtmls" nillable="true" type="xsd:string" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="ArrayOfWorkflowRequestInfo">
@@ -1942,7 +1942,7 @@
   </wsdl:binding>
   <wsdl:service name="WorkflowService">
     <wsdl:port name="WorkflowServiceHttpPort" binding="tns:WorkflowServiceHttpBinding">
-      <wsdlsoap:address location="http://192.168.1.237:8888/services/WorkflowService" />
+      <wsdlsoap:address location="http://172.16.4.29:8888/services/WorkflowService" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
