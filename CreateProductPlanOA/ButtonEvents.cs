@@ -78,6 +78,8 @@ namespace CreateProductPlanOA
                             }
                         }
 
+                        //View.ShowMessage(primaryKeyid+"-"+entryKeyid);
+
                         //执行运算并返回相关结果
                         mesage = generate.GetMessageIntoOa(primaryKeyid, entryKeyid, username);
                         View.ShowMessage(mesage != "Finish" ? $"新增订制产品生产计划流程异常,原因:'{mesage}'" : "新增成功,请打开OA,并留意右下角的OA信息提示");

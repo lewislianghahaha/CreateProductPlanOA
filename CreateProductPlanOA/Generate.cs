@@ -93,7 +93,7 @@ namespace CreateProductPlanOA
                 //主表设置
                 WorkflowMainTableInfo workflowMainTableInfo = new WorkflowMainTableInfo();
                 WorkflowRequestTableRecord[] workflowRequestTableRecords = new WorkflowRequestTableRecord[1]; //设置主表字段有一条记录
-                WorkflowRequestTableField[] workflowtabFields = new WorkflowRequestTableField[1];  //设置主表有多少个字段
+                WorkflowRequestTableField[] workflowtabFields = new WorkflowRequestTableField[48];  //设置主表有多少个字段
 
                 //将workflowtableFields所设置的字段加载到workflowRequestTableRecords内
                 workflowRequestTableRecords[0] = new WorkflowRequestTableRecord();
