@@ -32,7 +32,7 @@
             _result = $@"SELECT B.FNUMBER 客户代码
                          FROM dbo.T_SAL_ORDER A
                          INNER JOIN dbo.T_BD_CUSTOMER B ON A.FCUSTID=B.FCUSTID
-                         WHERE A.FID='{primaryKeyid}'";
+                         WHERE A.FID={primaryKeyid}";
 
             return _result;
         }

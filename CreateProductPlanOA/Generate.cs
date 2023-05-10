@@ -39,13 +39,13 @@ namespace CreateProductPlanOA
                 detaildt = searchDt.SearchK3OrderDetailRecord(entryKeyid).Copy();
 
                 //通过primaryKeyid 及 entryKeyid获取对应K3记录,并将记录分别插入至oauptempdt 及 oainserttempdt临时表内
-                oauptempdt.Merge(InsertRecordToUpTempDt(oauptempdt,primaryKeyid));
+                 oauptempdt.Merge(InsertRecordToUpTempDt(oauptempdt,primaryKeyid));
 
                 //对oauptempdt表进行数据处理,便于在最后更新时使用
                 var updatelist = GetUpdateList(oauptempdt);
 
                 //将oauptempdt,oainserttempdt 数据作为OA接口进行输出,并最后执行OA API方法
-                var resultvalue = CreateOaWorkFlow(Convert.ToInt32(oaDt.Rows[0][0]),updatelist,oainserttempdt,username);
+                 var resultvalue = CreateOaWorkFlow(Convert.ToInt32(oaDt.Rows[0][0]),updatelist,oainserttempdt,username);
 
                 result = resultvalue == "Finish" ? "Finish" : $"生成OA-订制产品生产计划流程导常,请联系管理员";
             }
