@@ -13,7 +13,7 @@ namespace CreateProductPlanOA
         public DataTable UpdateDtTemp()
         {
             var dt = new DataTable();
-            for (var i = 0; i < 5; i++)
+            for (var i = 0; i < 9; i++)
             {
                 var dc = new DataColumn();
                 switch (i)
@@ -41,6 +41,26 @@ namespace CreateProductPlanOA
                     //是否为工业涂料事业部客户
                     case 4:
                         dc.ColumnName = "sfwgytlsybkh";
+                        dc.DataType = Type.GetType("System.Int32");
+                        break;
+                    //申请人
+                    case 5:
+                        dc.ColumnName = "sqr";
+                        dc.DataType = Type.GetType("System.Int32");
+                        break;
+                    //申部日期
+                    case 6:
+                        dc.ColumnName = "sqrq";
+                        dc.DataType = Type.GetType("System.String");
+                        break;
+                    //部门
+                    case 7:
+                        dc.ColumnName = "bm";
+                        dc.DataType = Type.GetType("System.Int32");
+                        break;
+                    //职务
+                    case 8:
+                        dc.ColumnName = "zw";
                         dc.DataType = Type.GetType("System.Int32");
                         break;
                 }

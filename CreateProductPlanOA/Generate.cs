@@ -39,7 +39,7 @@ namespace CreateProductPlanOA
                 detaildt = searchDt.SearchK3OrderDetailRecord(entryKeyid).Copy();
 
                 //通过primaryKeyid 及 entryKeyid获取对应K3记录,并将记录分别插入至oauptempdt 及 oainserttempdt临时表内
-                 oauptempdt.Merge(InsertRecordToUpTempDt(oauptempdt,primaryKeyid));
+                 oauptempdt.Merge(InsertRecordToUpTempDt(oauptempdt, oaDt,primaryKeyid));
 
                 //对oauptempdt表进行数据处理,便于在最后更新时使用
                 var updatelist = GetUpdateList(oauptempdt);
@@ -164,9 +164,10 @@ namespace CreateProductPlanOA
         /// 将数据整合至临时表内-OA表头更新时使用
         /// </summary>
         /// <param name="resultdt"></param>
+        /// <param name="oadt">从OA获取的数据集合</param>
         /// <param name="primaryKeyid">获取前端收集的主表主键列表</param>
         /// <returns></returns>
-        private DataTable InsertRecordToUpTempDt(DataTable resultdt, string primaryKeyid)
+        private DataTable InsertRecordToUpTempDt(DataTable resultdt, DataTable oadt, string primaryKeyid)
         {
             //获取K3相关客户信息
             var k3Custdt = searchDt.SearchK3CustomerCode(primaryKeyid).Copy();
@@ -179,6 +180,10 @@ namespace CreateProductPlanOA
             newrow[2] = Convert.ToString(k3Custdt.Rows[0][0]); //客户代码
             newrow[3] = "2";      //产品性质
             newrow[4] = "1";      //是否为工业涂料事业部客户
+            newrow[5] = Convert.ToInt32(oadt.Rows[0][0]);      //申请人
+            newrow[6] = Convert.ToString(oadt.Rows[0][4]);     //申请日期
+            newrow[7] = Convert.ToInt32(oadt.Rows[0][2]);      //部门
+            newrow[8] = Convert.ToInt32(oadt.Rows[0][3]);      //职务
             resultdt.Rows.Add(newrow);
 
             return resultdt;
