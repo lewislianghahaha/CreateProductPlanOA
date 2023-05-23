@@ -45,7 +45,7 @@
         public string SearchK3SalesOderDeatilRecord(string entryKeyid)
         {
             _result = $@"SELECT B.FNUMBER 产品代码,C.FNAME 产品名称,D.FDATAVALUE 品牌,C.FSPECIFICATION 规格型号,A.FQTY 数量,ISNULL(E.F_YTC_TEXT1,'') 包装要求
-                                ,'0' 喷码,NULL 工业项目料号
+                                ,NULL 喷码,NULL 工业项目料号
                          FROM dbo.T_SAL_ORDERENTRY A
                          INNER JOIN dbo.T_BD_MATERIAL B ON A.FMATERIALID=B.FMATERIALID
                          INNER JOIN dbo.T_BD_MATERIAL_L C ON B.FMATERIALID=C.FMATERIALID AND C.FLOCALEID=2052
